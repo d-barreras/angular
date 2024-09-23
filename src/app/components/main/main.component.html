@@ -1,0 +1,39 @@
+<p>main works!</p>
+
+{{ listaTareas[0].titulo }}
+{{ listaTareas[1].titulo }}
+{{ listaTareas[2].titulo }}
+
+@for (tarea of listaTareas; track tarea.id) {
+ <li>
+    {{ tarea.titulo }}
+ </li>
+} @empty {
+    <li>¡Sin tareas!</li>
+}
+
+@for (tarea of listaTareas2; track $index) {
+<li>
+    {{ tarea.titulo }}
+</li>
+} @empty {
+    <li>¡Sin tareas!</li>
+}
+
+
+<button (click)="incrementar()">Sumar edad</button>
+Edad: {{edad}}
+
+@if (edad >= 18) {
+    <h1>Mayor de edad</h1>
+} @else {
+    <p>Menor de edad</p>
+}
+
+
+@switch (nombre) {
+ @case ('pedro') { <p>Bienvenido Pedro</p> }
+ @case ('ana') { <p>Bienvenida Ana</p> }
+ @case ('javier') { <p>Bienvenido Javier</p> }
+ @default { <p>Bienvenido Anónimo</p> }
+}
