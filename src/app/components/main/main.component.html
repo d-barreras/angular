@@ -1,39 +1,26 @@
-<p>main works!</p>
-
-{{ listaTareas[0].titulo }}
-{{ listaTareas[1].titulo }}
-{{ listaTareas[2].titulo }}
-
-@for (tarea of listaTareas; track tarea.id) {
- <li>
-    {{ tarea.titulo }}
- </li>
-} @empty {
-    <li>¡Sin tareas!</li>
-}
-
-@for (tarea of listaTareas2; track $index) {
-<li>
-    {{ tarea.titulo }}
-</li>
-} @empty {
-    <li>¡Sin tareas!</li>
-}
-
-
-<button (click)="incrementar()">Sumar edad</button>
-Edad: {{edad}}
-
-@if (edad >= 18) {
-    <h1>Mayor de edad</h1>
-} @else {
-    <p>Menor de edad</p>
-}
+<input type="text" [(ngModel)]="textoFiltro"/>
+<div>
+    @for (mensaje of listaMensajes | filter: textoFiltro; track mensaje.id) {
+        <div>
+            <p>{{ mensaje.texto | truncate: 20 }}</p>
+            <p>{{ mensaje.autor.nombre | uppercase  }}</p>
+            <p>{{ mensaje.fecha | date:'dd/MM/yyyy'  }}</p>
+            @if (mensaje.autor.id == usuarioConectado.id) {
+                <button (click)="borrar(mensaje.id)">Borrar</button>
+            }
+            <button *appCheckPermisos="'ADMIN'">Ocultar</button>
+        </div>
+        ===========================
+        <br>
+    } @empty {
+        No hay mensajes
+    }
+</div>
+<div>
+    Nuevo mensaje:
+    <input type="text" [(ngModel)]="nuevoTexto"/>
+    <button (click)="enviar()" [disabled]="!nuevoTexto">Enviar</button>
+</div>
 
 
-@switch (nombre) {
- @case ('pedro') { <p>Bienvenido Pedro</p> }
- @case ('ana') { <p>Bienvenida Ana</p> }
- @case ('javier') { <p>Bienvenido Javier</p> }
- @default { <p>Bienvenido Anónimo</p> }
-}
+

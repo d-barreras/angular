@@ -1,29 +1,4 @@
-<main class="main">
-  <h1>Hello, {{ title }}</h1>
-  <p>Congratulations!</p>
-</main>
-
-
 <app-header></app-header>
-
-
-<button [disabled]="!formValid">Guardar</button>
-
-<button [attr.aria-label]="label1">Test</button>
-<button attr.aria-label="{{ label1 }}"> Test</button>
-
-<button [attr.atributo1]="label1">Test</button>
-<button attr.aria-label="Texto concatenado {{ label1 }}"> Test</button>
-
-<button (click)="clickBoton()">Test click</button>
-
-<input type="text" (keyup)="teclaPulsada($event)" />
-
-
-<input type="text" [(ngModel)]="nombre" />
-<button (click)="mostrarValor()">Mostrar valor</button>
-
-
 <app-main/>
 
 
