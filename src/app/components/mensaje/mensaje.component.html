@@ -1,0 +1,10 @@
+<div>
+    <p>{{ mensaje.texto | truncate: 20 }}</p>
+    <p>{{ mensaje.autor.nombre | uppercase  }}</p>
+    <p>{{ mensaje.fecha | date:'dd/MM/yyyy'  }}</p>
+    @if (mensaje.autor.id == usuarioConectado.id) {
+        <button (click)="borrarUsuarioEnHijo()">Borrar</button>
+    }
+    <button *appCheckPermisos="'ADMIN'">Ocultar</button>
+</div>
+===========================

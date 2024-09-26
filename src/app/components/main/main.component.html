@@ -1,16 +1,8 @@
 <input type="text" [(ngModel)]="textoFiltro"/>
 <div>
     @for (mensaje of listaMensajes | filter: textoFiltro; track mensaje.id) {
-        <div>
-            <p>{{ mensaje.texto | truncate: 20 }}</p>
-            <p>{{ mensaje.autor.nombre | uppercase  }}</p>
-            <p>{{ mensaje.fecha | date:'dd/MM/yyyy'  }}</p>
-            @if (mensaje.autor.id == usuarioConectado.id) {
-                <button (click)="borrar(mensaje.id)">Borrar</button>
-            }
-            <button *appCheckPermisos="'ADMIN'">Ocultar</button>
-        </div>
-        ===========================
+        <!--<app-mensaje [mensaje]="mensaje" [usuarioConectado]="usuarioConectado" (usuarioBorradoEnHijo)="borrarEnPadre(mensaje.id)" />-->
+        <app-mensaje [mensaje]="mensaje" (usuarioBorradoEnHijo)="borrarEnPadre($event)" />
         <br>
     } @empty {
         No hay mensajes
@@ -21,6 +13,3 @@
     <input type="text" [(ngModel)]="nuevoTexto"/>
     <button (click)="enviar()" [disabled]="!nuevoTexto">Enviar</button>
 </div>
-
-
-
