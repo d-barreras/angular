@@ -3,11 +3,12 @@ import { CheckPermisosDirective } from '../../directives/check-permisos.directiv
 import { DatePipe, UpperCasePipe } from '@angular/common';
 import { TruncatePipe } from '../../pipes/truncate.pipe';
 import { UsuariosService } from '../../services/usuarios.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-mensaje',
   standalone: true,
-  imports: [CheckPermisosDirective, UpperCasePipe, DatePipe, TruncatePipe],
+  imports: [CheckPermisosDirective, UpperCasePipe, DatePipe, TruncatePipe, RouterLink],
   templateUrl: './mensaje.component.html',
   styleUrl: './mensaje.component.css'
 })

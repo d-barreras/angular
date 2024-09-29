@@ -1,0 +1,7 @@
+@if (usuario) {
+    Nombre: {{ usuario.nombre }}
+    Teléfono: {{ usuario.telefono }}
+} @else {
+    No existe el usuario
+}
+<a [routerLink]="['']">Volver</a>

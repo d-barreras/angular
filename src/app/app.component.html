@@ -1,6 +1,12 @@
-<app-header></app-header>
-<app-main/>
+<!-- <app-header></app-header> -->
 
+<nav>
+     <ul>
+        <li><a routerLink="/logo">Logo</a></li>
+        <li><a [routerLink]="['/user-info', 3]">User Info</a></li>
+        <li><a (click)="irAPaginaUsuarios(3)">User Info 2</a></li>
+    </ul>
+</nav>
 
 
 <router-outlet />
