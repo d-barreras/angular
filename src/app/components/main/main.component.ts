@@ -17,12 +17,26 @@ export class MainComponent {
   nuevoTexto = '';
   textoFiltro = '';
   listaMensajes : any[];
+  listaMensajes2 : any;
 
   private comentariosService = inject(ComentariosService);
   private usuariosService = inject(UsuariosService);
 
   constructor() {
     this.listaMensajes = this.comentariosService.listaMensajes;
+
+    this.comentariosService.getAll().subscribe(response => {
+      this.listaMensajes2 = response;
+      console.log('2');
+      console.log(this.listaMensajes2);
+    });
+
+    console.log('1');
+    console.log(this.listaMensajes2);
+
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+      .then(response => response.json())
+      .then(json => console.log(json))
   }
 
   enviar = () => {

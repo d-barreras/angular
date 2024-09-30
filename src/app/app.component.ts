@@ -1,7 +1,10 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { MainComponent } from './components/main/main.component';
+import { filter } from 'rxjs';
+import { UsuariosService } from './services/usuarios.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +15,29 @@ import { MainComponent } from './components/main/main.component';
 })
 export class AppComponent {
 
-  constructor(private router: Router) {
+  showHeader = false;
+
+  constructor(private router: Router, private usuariosService: UsuariosService, private http: HttpClient) {
     console.log("Inicio AppComponent");
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event) => {
+        this.showHeader = !this.router.url.includes('/login');
+      });
   }
 
-  irAPaginaUsuarios(id: any) {
-    this.router.navigate(['/user-info', id]);
+  irAPaginaUsuarios = (id: any) => this.router.navigate(['/user-info', id]);
+
+  logout = () => {
+    this.usuariosService.logout();
+    this.router.navigate(['/login'])
   }
-    
+
+  obtenerDatos() {
+    this.http.get('/api/datos').subscribe(datos => {
+      console.log(datos);
+    });
+  }
+
+
 }

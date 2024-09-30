@@ -1,12 +1,15 @@
 <!-- <app-header></app-header> -->
 
-<nav>
-     <ul>
-        <li><a routerLink="/logo">Logo</a></li>
-        <li><a [routerLink]="['/user-info', 3]">User Info</a></li>
-        <li><a (click)="irAPaginaUsuarios(3)">User Info 2</a></li>
-    </ul>
-</nav>
+@if (showHeader) {
+    <nav>
+        <ul>
+            <li><a routerLink="/logo">Logo</a></li>
+            <li><a [routerLink]="['/user-info', 3]">User Info</a></li>
+            <li><a (click)="irAPaginaUsuarios(3)">User Info 2</a></li>
+        </ul>
+    </nav>
+    <a (click)="logout()">Logout</a>
+}
 
 
 <router-outlet />

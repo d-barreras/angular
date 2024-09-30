@@ -2,11 +2,11 @@ import { CanActivateFn, Router } from '@angular/router';
 import { UsuariosService } from '../services/usuarios.service';
 import { inject } from '@angular/core';
 
-export const AuthGuard: CanActivateFn = (route, state) => {
+export const LoginGuard: CanActivateFn = (route, state) => {
   if (inject(UsuariosService).hayUsuarioConectado()) {
-    return true;
-  } else {
-    inject(Router).navigate(['/login']);
+    inject(Router).navigate(['/']);
     return false;
+  } else {
+    return true;
   }
 };

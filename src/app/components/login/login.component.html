@@ -1,0 +1,3 @@
+<div>Login: <input type="text" [(ngModel)]="login"/></div>
+<div>Password: <input type="password" [(ngModel)]="password"/></div>
+<div><button (click)="conectar()" [disabled]="!login || !password">Conectar</button></div>
