@@ -1,0 +1,36 @@
+<form (ngSubmit)="enviarDatos()" [formGroup]="formulariousuarios">
+
+    <label>Nombre</label>
+    <input type="text" formControlName="nombre" />
+    @if (formulariousuarios?.controls?.nombre?.errors && formulariousuarios?.controls?.nombre?.touched) {
+        @if (formulariousuarios.controls.nombre.errors.required) {
+            <div>Campo obligatorio</div>
+        }
+    }
+
+    <label>Email</label>
+    <input type="text" formControlName="email" />
+    @if (formulariousuarios?.controls?.email?.errors && formulariousuarios?.controls?.email?.touched) {
+        @if (formulariousuarios.controls.email.errors.required) { <div>Campo obligatorio</div> }
+        @if (formulariousuarios.controls.email.errors.email) { <div>Formato no válido</div> }
+    }
+
+    <label>Contraseña</label>
+    <input type="password" formControlName="password" />
+    @if (formulariousuarios?.controls?.password?.errors && formulariousuarios?.controls?.password?.touched) {
+        @if (formulariousuarios.controls.password.errors.required) { <div>Campo obligatorio</div> }
+        @if (formulariousuarios.controls.password.errors.minlength) { <div>Longitud mínima 6</div> }
+    }
+
+    <label>Repetir contraseña</label>
+    <input type="password" formControlName="repeatPass" />
+    @if (formulariousuarios?.controls?.repeatPass?.errors && formulariousuarios?.controls?.repeatPass?.touched) {
+        @if (formulariousuarios.controls.repeatPass.errors.required) { <div>Campo obligatorio</div> }
+        @if (formulariousuarios.controls.repeatPass.errors.mustMatch) { <div>La contraseña debe coincidir</div> }
+    }
+
+    <div class="text-center">
+        <!--<button [disabled]="formulariousuarios.invalid">Enviar</button>-->
+        <button>Enviar</button>
+    </div>
+</form>

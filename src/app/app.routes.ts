@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LoginGuard } from './guards/login.guard';
 import { UsersComponent } from './components/users/users.component';
 import { RoleGuard } from './guards/role.guard';
+import { AddUserComponent } from './components/users/add-user/add-user.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
@@ -22,6 +23,7 @@ export const routes: Routes = [
         canActivate: [AuthGuard, RoleGuard('admin')],
         children: [
             { path: '', component: UsersComponent },
+            { path: 'nuevo', component: AddUserComponent },
         ],        
     }
 ];
