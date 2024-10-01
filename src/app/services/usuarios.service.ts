@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -10,22 +11,29 @@ export class UsuariosService {
     { id: 2, nombre: "Usuario 2", telefono: "456", login: 'basic', password: 'basic', token: 'token_user_2' }
   ]
 
+  token: any;
   usuarioConectado: any;
   otroUsuario = this.listaUsuarios[1];
 
-  constructor() {
-    this.usuarioConectado = localStorage.getItem('userToken');
+  constructor(private http: HttpClient) {
+    this.token = localStorage.getItem('userToken');
+    this.usuarioConectado = this.listaUsuarios.find(u => u.token == this.token);
   }
 
   obtener = (id: any) => {
     return this.listaUsuarios.find(u => u.id == id);
   }
 
+  obtenerListaApi = () => {
+    return this.http.get('https://jsonplaceholder.typicode.com/users');
+  }
+
   login = (user: string, password: string) => {
     const usuario = this.listaUsuarios.find(e => e.login == user && e.password == password);
     if (usuario) {
       localStorage.setItem('userToken', usuario.token);
-      this.usuarioConectado = usuario.token;
+      this.token = usuario.token;
+      this.usuarioConectado = usuario;
       return true;
     }
     return false;
@@ -33,10 +41,15 @@ export class UsuariosService {
 
   logout = () => {
     localStorage.removeItem('userToken');
-    this.usuarioConectado = undefined;
+    this.token = undefined;
   }
 
   hayUsuarioConectado = () => {
-    return this.usuarioConectado != undefined;
+    return this.token != undefined;
   }
+
+  getToken = () => {
+    return this.token;
+  }
+
 }
